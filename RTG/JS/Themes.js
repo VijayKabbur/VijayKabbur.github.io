@@ -1,0 +1,51 @@
+var op = document.getElementById("OP");
+op.src = "Media/011.mp4";
+
+var r = Math.floor(Math.random() * 22 + 1);
+
+switch(r){
+    case 1: op.src = "Media/001.mp4";
+    break;
+    case 2: op.src = "Media/002.mp4";
+    break;
+    case 3: op.src = "Media/003.mp4";
+    break;
+    case 4: op.src = "Media/004.mp4";
+    break;
+    case 5: op.src = "Media/005.mp4";
+    break;
+    case 6: op.src = "Media/006.mp4";
+    break;
+    case 7: op.src = "Media/007.mp4";
+    break;
+    case 8: op.src = "Media/008.mp4";
+    break;
+    case 9: op.src = "Media/009.mp4";
+    break;
+    case 10: op.src = "Media/010.mp4";
+    break;
+    case 11: op.src = "Media/011.mp4";
+    break;
+    case 12: op.src = "Media/012.mp4";
+    break;
+    case 13: op.src = "Media/013.mp4";
+    break;
+    case 14: op.src = "Media/014.mp4";
+    break;
+    case 15: op.src = "Media/015.mp4";
+    break;
+    case 16: op.src = "Media/016.mp4";
+    break;
+    case 17: op.src = "Media/017.mp4";
+    break;
+    case 18: op.src = "Media/018.mp4";
+    break;
+    case 19: op.src = "Media/019.mp4";
+    break;
+    case 20: op.src = "Media/020.mp4";
+    break;
+    case 21: op.src = "Media/021.mp4";
+    break;
+    case 22: op.src = "Media/022.mp4";
+    break;
+}
