@@ -8,56 +8,76 @@ h1, h3{
     background-color: #c4c4c4;
 }
 
-img{
+.profileImage{
     height: 128px;
 }
 
-.l1{
+.pointerCursor{
+    cursor: pointer;
+}
+
+.listChild1{
     background-color: #546978;
 }
 
-.l2{
+.listChild2{
     background-color: #cab278;
 }
 
-.d1{
+.div1{
     background-color: #7890ca;
 }
 
-.d2{
+.div2{
     background-color: #a8fe7e;
 }
 
-.d3{
+.div3{
     background-color: #f96829;
     border-radius: 24px;
     padding: 5px;
 }
 
-.d4{
+.div4{
     background-color: #6829f9;
     border-radius: 24px;
     color: white;
     padding: 5px;
 }
 
-.d5{
+.div5{
     background-color: #ffc0cb;
 }
 
-.d6{
+.div6{
     background-color: #40e0d0;
     border-radius: 12px;
     padding: 10px;
 }
 
-.d7{
+.div6Legend{
+    background-color: #40e0d0;
+    border-radius: 12px;
+    float: left;
+    width: 8%;
+    padding-left: 10px;
+}
+
+.div7{
     background-color: #4ca3dd;
     border-radius: 12px;
     padding: 10px;
 }
 
-.d8{
+.div7Legend{
+    background-color: #4ca3dd;
+    border-radius: 12px;
+    float: left;
+    width: 6%;
+    padding-left: 15px;
+}
+
+.div8{
     background-color: #ff7f50;
     border-radius: 80px;
     float: left;
@@ -65,7 +85,7 @@ img{
     padding: 30px;
 }
 
-.d9{
+.div9{
     background-color: #4ca3dd;
     border-radius: 80px;
     float: right;
@@ -73,7 +93,7 @@ img{
     padding: 30px;
 }
 
-.d10{
+.div10{
     background-color: #660066;
     color:white;
     padding: 30px;
