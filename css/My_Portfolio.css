@@ -59,8 +59,9 @@ h1, h3{
     background-color: #40e0d0;
     border-radius: 12px;
     float: left;
-    width: 8%;
-    padding-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #000000;
 }
 
 .div7{
@@ -73,8 +74,9 @@ h1, h3{
     background-color: #4ca3dd;
     border-radius: 12px;
     float: left;
-    width: 6%;
-    padding-left: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #000000;
 }
 
 .div8{
