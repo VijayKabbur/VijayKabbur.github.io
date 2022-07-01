@@ -49,29 +49,61 @@
 }
 
 .menu_button_1{
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin: 3px;
     font-size: 27px;
     text-align: center;
+    border: 1px solid #000000;
+}
+
+.menu_button_1:hover{
+    background-color: #444444;
+    border: 1px solid #8888FF;
+    color: #8888FF;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .menu_button_2{
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin: 3px;
     font-size: 27px;
     text-align: center;
+    border: 1px solid #000000;
+}
+
+.menu_button_2:hover{
+    background-color: #444444;
+    border: 1px solid #FF4444;
+    color: #FF4444;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .menu_button_3{
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin: 3px;
     font-size: 27px;
     text-align: center;
+    border: 1px solid #000000;
+}
+
+.menu_button_3:hover{
+    background-color: #444444;
+    border: 1px solid #00CCFF;
+    color: #00CCFF;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .menu_button_4{
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin: 3px;
     font-size: 27px;
     text-align: center;
+    border: 1px solid #000000;
+}
+
+.menu_button_4:hover{
+    background-color: #444444;
+    border: 1px solid #FF8888;
+    color: #FF8888;
+    cursor: pointer;
+    font-weight: bold;
 }
