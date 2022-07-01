@@ -1,0 +1,77 @@
+.body{
+    background-color: #000000;
+    color: #FFFFFF;
+    font-family: 'Kaufmann', 'Yu Gothic UI', 'Segoe UI';
+    max-height: 100%;
+    overflow-y: hidden;
+}
+
+.title{
+    font-size: 42px;
+}
+
+.title_span_1{
+    color: #FF0000;
+}
+
+.title_span_2{
+    color: #00CCFF;
+}
+
+.title_span_3{
+    color: #FFFFFF;
+}
+
+.title_bar_top{
+    background-color: #FF8888;
+    width: 100%;
+    height: 5px;
+}
+
+.title_bar_bottom{
+    background-color: #8888FF;
+    width: 100%;
+    height: 5px;
+}
+
+.main_body{
+    width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+#sub_body_01_menu{
+    margin-left: 30%;
+    width: 40%;
+    margin-top: 13%;
+    height: 40%;
+    border: 2px solid #FFFF33;
+}
+
+.menu_button_1{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 27px;
+    text-align: center;
+}
+
+.menu_button_2{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 27px;
+    text-align: center;
+}
+
+.menu_button_3{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 27px;
+    text-align: center;
+}
+
+.menu_button_4{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 27px;
+    text-align: center;
+}
