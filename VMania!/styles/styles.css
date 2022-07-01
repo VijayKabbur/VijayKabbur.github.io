@@ -1,4 +1,4 @@
-.body{
+#body{
     background-color: #000000;
     color: #FFFFFF;
     font-family: 'Kaufmann', 'Yu Gothic UI', 'Segoe UI';
@@ -37,13 +37,13 @@
 .main_body{
     width: 100%;
     max-height: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 #sub_body_00_menu{
     margin-left: 30%;
-    width: 40%;
     margin-top: 13%;
+    width: 40%;
     height: 40%;
     border: 2px solid #FFFF33;
     display: block;
@@ -110,37 +110,81 @@
 }
 
 #sub_body_01_play_area{
-    margin-left: 30%;
-    width: 40%;
-    margin-top: 13%;
-    height: 40%;
-    border: 2px solid #FFFF33;
+    margin-left: 1%;
+    margin-top: 1%;
+    width: 98%;
+    max-height: 100%;
+    overflow-y: hidden;
     display: none;
 }
 
-.play_menu_button_1{
+#pa_01a_play_screen{
+    margin-left: 15%;
+    margin-top: 2px;
+    width: 30%;
+    height: calc(100vh - 102px);
+    font-size: 27px;
+    border: 2px solid #8888FF;
+    display: block;
+}
+
+#ps_01_header{
+    margin: 2px;
+    height: 35px;
+    font-size: 27px;
+    text-align: center;
+    border: 2px solid #8888FF;
+}
+
+#ps_02_pane{
+    margin: 2px;
+    height: 87%;
+    height: calc(100vh - 192px);
+    border: 2px solid #8888FF;
+}
+
+#ps_03_footer{
+    margin: 2px;
+    height: 35px;
+    border: 2px solid #8888FF;
+}
+
+#pa_01b_result_screen{
+    margin-top: 1%;
+    width: 100%;
+    min-height: 90%;
+    font-size: 27px;
+    text-align: center;
+    border: 1px solid #8888FF;
+    display: none;
+}
+
+#sub_body_02_options_menu{
+    margin-left: 30%;
+    margin-top: 13%;
+    width: 40%;
+    height: 40%;
+    border: 2px solid #FF8888;
+    display: none;
+}
+
+#sub_body_03_about_menu{
+    margin-left: 30%;
+    margin-top: 13%;
+    width: 40%;
+    height: 40%;
+    border: 2px solid #00CCFF;
+    display: none;
+}
+
+.back_to_menu_button{
     margin: 3px;
     font-size: 27px;
     text-align: center;
     border: 1px solid #000000;
 }
 
-.play_menu_button_1:hover{
-    background-color: #444444;
-    border: 1px solid #00CCFF;
-    color: #00CCFF;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.play_menu_button_2{
-    margin: 3px;
-    font-size: 27px;
-    text-align: center;
-    border: 1px solid #000000;
-}
-
-.play_menu_button_2:hover{
+.back_to_menu_button:hover{
     background-color: #444444;
     border: 1px solid #FF4444;
     color: #FF4444;

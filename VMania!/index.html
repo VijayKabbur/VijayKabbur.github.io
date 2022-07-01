@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>VMania</title>
+        <title>VMania!</title>
         <link rel="stylesheet" href="./styles/styles.css">
         <script src="./scripts/scripts.js"></script>
     </head>
 
-    <body class="body">
+    <body id="body">
         <div class="title_bar_top"></div>
         <span class="title">
             <center>
@@ -18,14 +18,32 @@
         <div class="main_body">
             <div id="sub_body_00_menu">
                 <div class="menu_button_1" onClick="lets_play()">Play</div>
-                <div class="menu_button_2">Options</div>
-                <div class="menu_button_3">About</div>
+                <div class="menu_button_2" onClick="lets_customize()">Options</div>
+                <div class="menu_button_3" onClick="lets_explore()">About</div>
                 <div class="menu_button_4" onClick="quit_game()">Quit</div>
             </div>
             
             <div id="sub_body_01_play_area">
-                <div class="play_menu_button_1" onClick="start_new_game()">Start New Game</div>
-                <div class="play_menu_button_2" onClick="back_to_menu()">Back to Menu</div>
+                <div id="pa_01a_play_screen">
+                    <div id="ps_01_header">
+                        Himeno
+                    </div>
+                    <div id="ps_02_pane">
+                    </div>
+                    <div id="ps_03_footer">
+                    </div>
+                </div>
+                
+                <div id="pa_01b_result_screen">
+                </div>
+            </div>
+            
+            <div id="sub_body_02_options_menu">
+                <div class="back_to_menu_button" onClick="back_to_menu()">Back to Menu</div>
+            </div>
+            
+            <div id="sub_body_03_about_menu">
+                <div class="back_to_menu_button" onClick="back_to_menu()">Back to Menu</div>
             </div>
         </div>
     </body>
