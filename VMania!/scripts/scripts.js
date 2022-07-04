@@ -1,3 +1,5 @@
+var current_menu = "sub_body_00_menu";
+
 function switch_sub_body(z){
     var sub_bodies = ["sub_body_00_menu", "sub_body_01_play_area", "sub_body_02_options_menu", "sub_body_03_about_menu"];
     for(let i=0; i < sub_bodies.length; i++){
@@ -5,6 +7,7 @@ function switch_sub_body(z){
     }
     z.forEach(y => {
         document.getElementById(sub_bodies[y]).style.display = "block";
+        current_menu = sub_bodies[y];
     });
 }
 
@@ -52,6 +55,7 @@ function tap_col_1(){
     setTimeout(function(){
         document.getElementById("ps_pane_col_1").style.background = originalBackgroundColor;
     }, 70);
+    spawn_note();
 }
 
 function tap_col_2(){
@@ -93,4 +97,39 @@ function keypress_col_n(e) {
     if(e.key == 'k' || e.key == 'K') {
         tap_col_4();
     }
+    if(current_menu === "sub_body_00_menu"){
+        if(e.key == 'p' || e.key == 'P') {
+            lets_play();
+        }
+        if(e.key == 'o' || e.key == 'O') {
+            lets_customize();
+        }
+        if(e.key == 'a' || e.key == 'A') {
+            lets_explore();
+        }
+        if(e.key == 'q' || e.key == 'Q') {
+            quit_game();
+        }
+    }
 }
+
+var note_id = 1;
+
+function spawn_note(){
+    random_column = Math.floor(Math.random() * 4) + 1;
+if(note_id == 1){
+    let note = document.createElement("div");
+    note.className = 'note_1';
+    note.id = "note_" + note_id++;
+    document.getElementById("ps_pane_col_" + random_column).append(note);
+}
+    move_note(1);
+}
+
+function move_note(id){
+    let margin_top = 1;
+    while(margin_top < 100){
+        document.getElementById("note_" + id).style.marginTop = (margin_top++) + '%';
+    }
+}
+
