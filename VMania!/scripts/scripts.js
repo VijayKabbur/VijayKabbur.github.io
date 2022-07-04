@@ -45,3 +45,52 @@ function back_to_menu(){
 
 function start_new_game(){
 }
+
+function tap_col_1(){
+    let originalBackgroundColor = document.getElementById("ps_pane_col_1").style.background;
+    document.getElementById("ps_pane_col_1").style.background = "#444444";
+    setTimeout(function(){
+        document.getElementById("ps_pane_col_1").style.background = originalBackgroundColor;
+    }, 70);
+}
+
+function tap_col_2(){
+    let originalBackgroundColor = document.getElementById("ps_pane_col_2").style.background;
+    document.getElementById("ps_pane_col_2").style.background = "#444444";
+    setTimeout(function(){
+        document.getElementById("ps_pane_col_2").style.background = originalBackgroundColor;
+    }, 70);
+}
+
+function tap_col_3(){
+    let originalBackgroundColor = document.getElementById("ps_pane_col_3").style.background;
+    document.getElementById("ps_pane_col_3").style.background = "#444444";
+    setTimeout(function(){
+        document.getElementById("ps_pane_col_3").style.background = originalBackgroundColor;
+    }, 70);
+}
+
+function tap_col_4(){
+    let originalBackgroundColor = document.getElementById("ps_pane_col_4").style.background;
+    document.getElementById("ps_pane_col_4").style.background = "#444444";
+    setTimeout(function(){
+        document.getElementById("ps_pane_col_4").style.background = originalBackgroundColor;
+    }, 70);
+}
+
+document.addEventListener("keydown", keypress_col_n, false);
+
+function keypress_col_n(e) {
+    if(e.key == 'd' || e.key == 'D') {
+        tap_col_1();
+    }
+    if(e.key == 'f' || e.key == 'F') {
+        tap_col_2();
+    }
+    if(e.key == 'j' || e.key == 'J') {
+        tap_col_3();
+    }
+    if(e.key == 'k' || e.key == 'K') {
+        tap_col_4();
+    }
+}
