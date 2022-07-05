@@ -55,7 +55,6 @@ function tap_col_1(){
     setTimeout(function(){
         document.getElementById("ps_pane_col_1").style.background = originalBackgroundColor;
     }, 70);
-    spawn_note();
 }
 
 function tap_col_2(){
@@ -85,6 +84,10 @@ function tap_col_4(){
 document.addEventListener("keydown", keypress_col_n, false);
 
 function keypress_col_n(e) {
+    if(e.key == 's' || e.key == 'S') {
+        //For Testing
+        spawn_note();
+    }
     if(e.key == 'd' || e.key == 'D') {
         tap_col_1();
     }
@@ -119,6 +122,10 @@ function keypress_col_n(e) {
     }
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 var note_id = 1;
 
 function spawn_note(){
@@ -132,14 +139,15 @@ if(note_id == 1){
     move_note(1);
 }
 
-function move_note(id){
+async function move_note(id){
     let margin_top = 1;
-    console.log(document.getElementById("note_" + id).getBoundingClientRect().top);
-    document.getElementById("note_" + id).getBoundingClientRect().top = 200;
-    console.log(document.getElementById("note_" + id).getBoundingClientRect().top);
-    while(margin_top <= 100){
-        // document.getElementById("note_" + id).style.marginTop = (margin_top++) + '%';
-        document.getElementById("note_" + id).style.top = (margin_top++) + 'px';
+    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
+    let current_height = document.getElementById("note_" + id).getBoundingClientRect().top;
+
+    while(current_height <= pane_bottom){
+        document.getElementById("note_" + id).style.marginTop = (margin_top++) + '%';
+        // document.getElementById("note_" + id).style.top = (margin_top++) + 'px';
+        current_height = document.getElementById("note_" + id).getBoundingClientRect().top;
+        await sleep(1);
     }
 }
-
