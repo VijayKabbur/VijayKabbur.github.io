@@ -1,9 +1,9 @@
-@font-face {
+/* @font-face {
     font-family: 'Kaufmann';
     src: URL('./Kaufmann.ttf') format('truetype'),
         url('./KaufmannScript.woff2') format('woff2'),
         url('./KaufmannScript.woff') format('woff');
-}
+} */
   
 #body{
     background-color: #000000;
