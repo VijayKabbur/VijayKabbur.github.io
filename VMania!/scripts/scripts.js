@@ -111,6 +111,12 @@ function keypress_col_n(e) {
             quit_game();
         }
     }
+    if(e.key == 'b' || e.key == 'B') {
+        switch_sub_body([0]);
+    }
+    if(e.key == 'r' || e.key == 'R') {
+        window.location.reload();
+    }
 }
 
 var note_id = 1;
@@ -128,8 +134,12 @@ if(note_id == 1){
 
 function move_note(id){
     let margin_top = 1;
-    while(margin_top < 100){
-        document.getElementById("note_" + id).style.marginTop = (margin_top++) + '%';
+    console.log(document.getElementById("note_" + id).getBoundingClientRect().top);
+    document.getElementById("note_" + id).getBoundingClientRect().top = 200;
+    console.log(document.getElementById("note_" + id).getBoundingClientRect().top);
+    while(margin_top <= 100){
+        // document.getElementById("note_" + id).style.marginTop = (margin_top++) + '%';
+        document.getElementById("note_" + id).style.top = (margin_top++) + 'px';
     }
 }
 
