@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'Kaufmann';
-    src: URL('./styles/Kaufmann.ttf') format('truetype'),
-        url('./styles/KaufmannScript.woff2') format('woff2'),
-        url('./styles/KaufmannScript.woff') format('woff');
+    src: URL('./Kaufmann.ttf') format('truetype'),
+        url('./KaufmannScript.woff2') format('woff2'),
+        url('./KaufmannScript.woff') format('woff');
 }
   
 #body{
