@@ -47,6 +47,9 @@ function back_to_menu(){
 }
 
 function start_new_game(){
+    setInterval(function(){
+        spawn_note();
+    },250);
 }
 
 function tap_col_1(){
@@ -86,7 +89,8 @@ document.addEventListener("keydown", keypress_col_n, false);
 function keypress_col_n(e) {
     if(e.key == 's' || e.key == 'S') {
         //For Testing
-        spawn_note();
+        start_new_game();
+        // spawn_note();
     }
     if(e.key == 'd' || e.key == 'D') {
         tap_col_1();
@@ -127,27 +131,37 @@ function sleep(ms) {
 }
 
 var note_id = 1;
+var note_miss = false;
+var speed = 15;
 
 function spawn_note(){
     random_column = Math.floor(Math.random() * 4) + 1;
-if(note_id == 1){
+
     let note = document.createElement("div");
-    note.className = 'note_1';
-    note.id = "note_" + note_id++;
-    document.getElementById("ps_pane_col_" + random_column).append(note);
-}
-    move_note(1);
+    note.className = 'note_type_1';
+    if(random_column === 1 || random_column === 4){
+        note.className = 'note_type_2';
+    }
+    note.id = "note_" + note_id;
+    note.marginTop = '0px';
+    note.style.width = getComputedStyle(document.getElementById("ps_pane_col_" + random_column)).width;
+    document.getElementById("ps_pane_col_" + random_column).prepend(note);
+    
+    move_note(note_id);
+    note_id += 1;
 }
 
 async function move_note(id){
     let margin_top = 1;
     let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
-    let current_height = document.getElementById("note_" + id).getBoundingClientRect().top;
+    let note = document.getElementById("note_" + id);
+    let current_height = note.getBoundingClientRect().top;
 
     while(current_height <= pane_bottom){
-        document.getElementById("note_" + id).style.marginTop = (margin_top++) + '%';
-        // document.getElementById("note_" + id).style.top = (margin_top++) + 'px';
-        current_height = document.getElementById("note_" + id).getBoundingClientRect().top;
-        await sleep(1);
+        document.getElementById("note_" + id).style.top = margin_top + 'px';
+        await sleep(0.01);
+        margin_top += speed;
+        current_height = note.getBoundingClientRect().top;
     }
+    note.parentElement.removeChild(note);
 }
