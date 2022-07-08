@@ -1,7 +1,11 @@
+var sub_bodies = ["sub_body_00_menu", "sub_body_01_play_mode_menu", "sub_body_02_options_menu", "sub_body_03_about_menu", "sub_body_04_play_area"];
 var current_menu = "sub_body_00_menu";
 
+var note_id = 1;
+var note_miss = false;
+var speed = 15;
+
 function switch_sub_body(z){
-    var sub_bodies = ["sub_body_00_menu", "sub_body_01_play_area", "sub_body_02_options_menu", "sub_body_03_about_menu"];
     for(let i=0; i < sub_bodies.length; i++){
         document.getElementById(sub_bodies[i]).style.display = "none";
     }
@@ -44,6 +48,10 @@ function quit_game(){
 
 function back_to_menu(){
     switch_sub_body([0]);
+}
+
+function lets_play_already(){
+    switch_sub_body([4]);
 }
 
 function start_new_game(){
@@ -118,6 +126,11 @@ function keypress_col_n(e) {
             quit_game();
         }
     }
+    if(current_menu === "sub_body_01_play_mode_menu"){
+        if(e.key == 'e' || e.key == 'E') {
+            lets_play_already();
+        }
+    }
     if(e.key == 'b' || e.key == 'B') {
         switch_sub_body([0]);
     }
@@ -129,10 +142,6 @@ function keypress_col_n(e) {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-var note_id = 1;
-var note_miss = false;
-var speed = 15;
 
 function spawn_note(){
     random_column = Math.floor(Math.random() * 4) + 1;

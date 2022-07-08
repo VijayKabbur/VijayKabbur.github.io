@@ -117,7 +117,16 @@
     font-weight: bold;
 }
 
-#sub_body_01_play_area{
+#sub_body_01_play_mode_menu{
+    margin-left: 30%;
+    margin-top: 13%;
+    width: 40%;
+    height: 40%;
+    border: 2px solid #8888FF;
+    display: none;
+}
+
+#sub_body_04_play_area{
     margin-left: 1%;
     margin-top: 1%;
     width: 98%;
