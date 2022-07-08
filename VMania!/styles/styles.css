@@ -49,12 +49,10 @@
 
 #sub_body_00_menu{
     margin-left: 30%;
-    /* margin-top: 13%; */
     margin-top: calc(30vh);
     width: 40%;
     height: 40%;
     border: 2px solid #FFFF33;
-    display: block;
 }
 
 .menu_button_1{
@@ -136,6 +134,7 @@
 }
 
 #pa_01a_play_screen{
+    float: left;
     margin-left: 15%;
     margin-top: 2px;
     width: 30%;
@@ -245,6 +244,18 @@
     text-align: center;
     border: 1px solid #8888FF;
     display: none;
+}
+
+#pa_01z_countdown{
+    float: left;
+    margin-left: 65%;
+    margin-top: 15%;
+    font-size: 47px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    /* border: 1px solid #8888FF; */
+    position: absolute;
 }
 
 #sub_body_02_options_menu{

@@ -1,9 +1,12 @@
 var sub_bodies = ["sub_body_00_menu", "sub_body_01_play_mode_menu", "sub_body_02_options_menu", "sub_body_03_about_menu", "sub_body_04_play_area"];
 var current_menu = "sub_body_00_menu";
 
-var note_id = 1;
-var note_miss = false;
+var note_spawn_interval = 250;
 var speed = 15;
+var note_miss = false;
+var game_over = false;
+var note_id = 1;
+var current_note_id = 1;
 
 function switch_sub_body(z){
     for(let i=0; i < sub_bodies.length; i++){
@@ -18,7 +21,7 @@ function switch_sub_body(z){
 function switch_to_fullscreen(){
     var body = document.getElementById("body");
     if(body.requestFullscreen){
-        // body.requestFullscreen();
+        body.requestFullscreen();
     }
     else if(body.webkitRequestFullscreen){ 
         body.webkitRequestFullscreen();
@@ -52,12 +55,32 @@ function back_to_menu(){
 
 function lets_play_already(){
     switch_sub_body([4]);
+    setTimeout(function(){
+        document.getElementById("pa_01z_countdown").innerHTML = "3";
+        document.getElementById("pa_01z_countdown").style.color = "#FF4444";
+    }, 1000);
+    setTimeout(function(){
+        document.getElementById("pa_01z_countdown").innerHTML = "2";
+        document.getElementById("pa_01z_countdown").style.color = "#00CCFF";
+    }, 2000);
+    setTimeout(function(){
+        document.getElementById("pa_01z_countdown").innerHTML = "1";
+        document.getElementById("pa_01z_countdown").style.color = "#8888FF";
+    }, 3000);
+    setTimeout(function(){
+        document.getElementById("pa_01z_countdown").innerHTML = "Play!";
+        document.getElementById("pa_01z_countdown").style.color = "#FFFF33";
+        start_new_game();
+    }, 4000);
+    setTimeout(function(){
+        document.getElementById("pa_01z_countdown").style.display = "none";
+    }, 4700);
 }
 
 function start_new_game(){
     setInterval(function(){
         spawn_note();
-    },250);
+    },note_spawn_interval);
 }
 
 function tap_col_1(){
@@ -95,23 +118,6 @@ function tap_col_4(){
 document.addEventListener("keydown", keypress_col_n, false);
 
 function keypress_col_n(e) {
-    if(e.key == 's' || e.key == 'S') {
-        //For Testing
-        start_new_game();
-        // spawn_note();
-    }
-    if(e.key == 'd' || e.key == 'D') {
-        tap_col_1();
-    }
-    if(e.key == 'f' || e.key == 'F') {
-        tap_col_2();
-    }
-    if(e.key == 'j' || e.key == 'J') {
-        tap_col_3();
-    }
-    if(e.key == 'k' || e.key == 'K') {
-        tap_col_4();
-    }
     if(current_menu === "sub_body_00_menu"){
         if(e.key == 'p' || e.key == 'P') {
             lets_play();
@@ -136,6 +142,18 @@ function keypress_col_n(e) {
     }
     if(e.key == 'r' || e.key == 'R') {
         window.location.reload();
+    }
+    if(e.key == 'd' || e.key == 'D') {
+        tap_col_1();
+    }
+    if(e.key == 'f' || e.key == 'F') {
+        tap_col_2();
+    }
+    if(e.key == 'j' || e.key == 'J') {
+        tap_col_3();
+    }
+    if(e.key == 'k' || e.key == 'K') {
+        tap_col_4();
     }
 }
 
