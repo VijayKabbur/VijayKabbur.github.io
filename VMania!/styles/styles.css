@@ -246,6 +246,17 @@
     display: none;
 }
 
+#pa_01c_combo{
+    float: left;
+    margin-left: 45%;
+    margin-top: 25%;
+    font-size: 47px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    position: absolute;
+}
+
 #pa_01z_countdown{
     float: left;
     margin-left: 65%;

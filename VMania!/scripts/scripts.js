@@ -2,11 +2,14 @@ var sub_bodies = ["sub_body_00_menu", "sub_body_01_play_mode_menu", "sub_body_02
 var current_menu = "sub_body_00_menu";
 
 var note_spawn_interval = 250;
-var speed = 15;
+var speed = 10;
+var note_animation_interval = 0.01;
+var buffer_difference = 10;
 var note_miss = false;
 var game_over = false;
 var note_id = 1;
 var current_note_id = 1;
+var combo = 0;
 
 function switch_sub_body(z){
     for(let i=0; i < sub_bodies.length; i++){
@@ -89,6 +92,15 @@ function tap_col_1(){
     setTimeout(function(){
         document.getElementById("ps_pane_col_1").style.background = originalBackgroundColor;
     }, 70);
+
+    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
+    let note = document.getElementById("note_" + current_note_id);
+    let current_height = note.getBoundingClientRect().top;
+    
+    if((current_height <= pane_bottom) && ((pane_bottom - current_height) >= buffer_difference)){
+        current_note_id += 1;
+        combo += 1;
+    }
 }
 
 function tap_col_2(){
@@ -97,6 +109,16 @@ function tap_col_2(){
     setTimeout(function(){
         document.getElementById("ps_pane_col_2").style.background = originalBackgroundColor;
     }, 70);
+
+    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
+    let note = document.getElementById("note_" + current_note_id);
+    let current_height = note.getBoundingClientRect().top;
+    
+    if((current_height <= pane_bottom) && ((pane_bottom - current_height) >= buffer_difference)){
+        current_note_id += 1;
+        combo += 1;
+        document.getElementById("pa_01c_combo").innerHTML = combo;
+    }
 }
 
 function tap_col_3(){
@@ -105,6 +127,15 @@ function tap_col_3(){
     setTimeout(function(){
         document.getElementById("ps_pane_col_3").style.background = originalBackgroundColor;
     }, 70);
+
+    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
+    let note = document.getElementById("note_" + current_note_id);
+    let current_height = note.getBoundingClientRect().top;
+    
+    if((current_height <= pane_bottom) && ((pane_bottom - current_height) >= buffer_difference)){
+        current_note_id += 1;
+        combo += 1;
+    }
 }
 
 function tap_col_4(){
@@ -113,6 +144,15 @@ function tap_col_4(){
     setTimeout(function(){
         document.getElementById("ps_pane_col_4").style.background = originalBackgroundColor;
     }, 70);
+
+    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
+    let note = document.getElementById("note_" + current_note_id);
+    let current_height = note.getBoundingClientRect().top;
+    
+    if((current_height <= pane_bottom) && ((pane_bottom - current_height) >= buffer_difference)){
+        current_note_id += 1;
+        combo += 1;
+    }
 }
 
 document.addEventListener("keydown", keypress_col_n, false);
@@ -186,7 +226,7 @@ async function move_note(id){
 
     while(current_height <= pane_bottom){
         document.getElementById("note_" + id).style.top = margin_top + 'px';
-        await sleep(0.01);
+        await sleep(note_animation_interval);
         margin_top += speed;
         current_height = note.getBoundingClientRect().top;
     }
