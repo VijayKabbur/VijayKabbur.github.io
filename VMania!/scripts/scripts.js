@@ -1,7 +1,7 @@
 var note_spawn_interval = 250;
-var speed = 5;
+var speed = 12;
 var note_animation_interval = 0.01;
-var buffer_difference = 50;
+var buffer_difference = 30;
 
 
 var game_session;
@@ -119,9 +119,12 @@ function lets_play_already(){
 
     let pa_01z_countdown = document.getElementById("pa_01z_countdown");
 
+    pa_01z_countdown.innerHTML = "Ready?";
+    pa_01z_countdown.style.color = "#FFFFFF";
+
     setTimeout(function(){
         pa_01z_countdown.innerHTML = "3";
-        pa_01z_countdown.style.color = "#FF4444";
+        pa_01z_countdown.style.color = "#FF8888";
     }, 1000);
 
     setTimeout(function(){
@@ -162,7 +165,6 @@ function init_game(){
 
 function start_new_game(){
     init_game();
-    // setInterval(function(){
     game_session = setInterval(function(){
         spawn_note();
     },note_spawn_interval);
@@ -170,7 +172,7 @@ function start_new_game(){
 
 
 function tap_col(n){
-    let originalBackgroundColor = document.getElementById("ps_pane_col_" + n).style.background;
+    //let originalBackgroundColor = document.getElementById("ps_pane_col_" + n).style.background;
 
     document.getElementById("ps_pane_col_" + n).style.background = "#444444";
     setTimeout(function(){
@@ -188,9 +190,10 @@ function tap_note(){
     }
 
     let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
-    let current_height = note.getBoundingClientRect().top;
+    let current_height = note.getBoundingClientRect().bottom;
+    let precision = Math.abs(pane_bottom - current_height);
 
-    if((current_height <= pane_bottom) && (Math.abs(pane_bottom - current_height) <= buffer_difference)){
+    if(precision <= buffer_difference){
         note.parentElement.removeChild(note);
         current_note_id += 1;
         combo += 1;
@@ -222,7 +225,7 @@ function spawn_note(){
     let note = document.createElement("div");
     note.className = (random_column === 1 || random_column === 4) ? 'note_type_2' : 'note_type_1';
     note.id = "note_" + note_id;
-    note.style.marginTop = '0px';
+    note.style.top = document.getElementById("ps_02_pane").getBoundingClientRect().top;
     note.style.width = getComputedStyle(document.getElementById("ps_pane_col_" + random_column)).width;
     document.getElementById("ps_pane_col_" + random_column).prepend(note);
 
@@ -240,27 +243,19 @@ async function move_note(id){
         return;
     }
 
-    let margin_top = 1;
-    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
+    let note_depth = document.getElementById("ps_02_pane").getBoundingClientRect().top;
+    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom + buffer_difference;
 
     let current_height = note.getBoundingClientRect().top;
 
     while((current_height <= pane_bottom)){
-        // if(is_game_over) note.parentElement.removeChild(note);
         if(note == null) break;
-        note.style.top = margin_top + 'px';
+        note.style.top = note_depth + 'px';
         await sleep(note_animation_interval);
-        if(is_game_paused == false) margin_top += speed;
+        if(is_game_paused == false) note_depth += speed;
         current_height = note.getBoundingClientRect().top;
     }
 
-    
-
-    // if(document.getElementById("note_" + id) == null){
-    //     if(combo < id){
-    //         game_over();
-    //     }
-    // }
     if(note != null){
         note.parentElement.removeChild(note);
         is_game_paused = true;
