@@ -1,15 +1,21 @@
+var note_spawn_interval = 250;
+var speed = 5;
+var note_animation_interval = 0.01;
+var buffer_difference = 50;
+
+
+var game_session;
+var is_game_paused = false;
+var is_game_over = false;
+var note_id = 1;
+var current_note_id = 1;
+var latest_note_id = 0;
+var combo = 0;
+
+
 var sub_bodies = ["sub_body_00_menu", "sub_body_01_play_mode_menu", "sub_body_02_options_menu", "sub_body_03_about_menu", "sub_body_04_play_area"];
 var current_menu = "sub_body_00_menu";
 
-var note_spawn_interval = 250;
-var speed = 10;
-var note_animation_interval = 0.01;
-var buffer_difference = 10;
-var note_miss = false;
-var game_over = false;
-var note_id = 1;
-var current_note_id = 1;
-var combo = 0;
 
 function switch_sub_body(z){
     for(let i=0; i < sub_bodies.length; i++){
@@ -21,6 +27,7 @@ function switch_sub_body(z){
     });
 }
 
+
 function switch_to_fullscreen(){
     var body = document.getElementById("body");
     if(body.requestFullscreen){
@@ -30,6 +37,7 @@ function switch_to_fullscreen(){
         body.webkitRequestFullscreen();
     }
 }
+
 
 function lets_play(){
     switch_sub_body([1]);
@@ -56,104 +64,6 @@ function back_to_menu(){
     switch_sub_body([0]);
 }
 
-function lets_play_already(){
-    switch_sub_body([4]);
-    setTimeout(function(){
-        document.getElementById("pa_01z_countdown").innerHTML = "3";
-        document.getElementById("pa_01z_countdown").style.color = "#FF4444";
-    }, 1000);
-    setTimeout(function(){
-        document.getElementById("pa_01z_countdown").innerHTML = "2";
-        document.getElementById("pa_01z_countdown").style.color = "#00CCFF";
-    }, 2000);
-    setTimeout(function(){
-        document.getElementById("pa_01z_countdown").innerHTML = "1";
-        document.getElementById("pa_01z_countdown").style.color = "#8888FF";
-    }, 3000);
-    setTimeout(function(){
-        document.getElementById("pa_01z_countdown").innerHTML = "Play!";
-        document.getElementById("pa_01z_countdown").style.color = "#FFFF33";
-        start_new_game();
-    }, 4000);
-    setTimeout(function(){
-        document.getElementById("pa_01z_countdown").style.display = "none";
-    }, 4700);
-}
-
-function start_new_game(){
-    setInterval(function(){
-        spawn_note();
-    },note_spawn_interval);
-}
-
-function tap_col_1(){
-    let originalBackgroundColor = document.getElementById("ps_pane_col_1").style.background;
-    document.getElementById("ps_pane_col_1").style.background = "#444444";
-    setTimeout(function(){
-        document.getElementById("ps_pane_col_1").style.background = originalBackgroundColor;
-    }, 70);
-
-    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
-    let note = document.getElementById("note_" + current_note_id);
-    let current_height = note.getBoundingClientRect().top;
-    
-    if((current_height <= pane_bottom) && ((pane_bottom - current_height) >= buffer_difference)){
-        current_note_id += 1;
-        combo += 1;
-    }
-}
-
-function tap_col_2(){
-    let originalBackgroundColor = document.getElementById("ps_pane_col_2").style.background;
-    document.getElementById("ps_pane_col_2").style.background = "#444444";
-    setTimeout(function(){
-        document.getElementById("ps_pane_col_2").style.background = originalBackgroundColor;
-    }, 70);
-
-    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
-    let note = document.getElementById("note_" + current_note_id);
-    let current_height = note.getBoundingClientRect().top;
-    
-    if((current_height <= pane_bottom) && ((pane_bottom - current_height) >= buffer_difference)){
-        current_note_id += 1;
-        combo += 1;
-        document.getElementById("pa_01c_combo").innerHTML = combo;
-    }
-}
-
-function tap_col_3(){
-    let originalBackgroundColor = document.getElementById("ps_pane_col_3").style.background;
-    document.getElementById("ps_pane_col_3").style.background = "#444444";
-    setTimeout(function(){
-        document.getElementById("ps_pane_col_3").style.background = originalBackgroundColor;
-    }, 70);
-
-    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
-    let note = document.getElementById("note_" + current_note_id);
-    let current_height = note.getBoundingClientRect().top;
-    
-    if((current_height <= pane_bottom) && ((pane_bottom - current_height) >= buffer_difference)){
-        current_note_id += 1;
-        combo += 1;
-    }
-}
-
-function tap_col_4(){
-    let originalBackgroundColor = document.getElementById("ps_pane_col_4").style.background;
-    document.getElementById("ps_pane_col_4").style.background = "#444444";
-    setTimeout(function(){
-        document.getElementById("ps_pane_col_4").style.background = originalBackgroundColor;
-    }, 70);
-
-    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
-    let note = document.getElementById("note_" + current_note_id);
-    let current_height = note.getBoundingClientRect().top;
-    
-    if((current_height <= pane_bottom) && ((pane_bottom - current_height) >= buffer_difference)){
-        current_note_id += 1;
-        combo += 1;
-    }
-}
 
 document.addEventListener("keydown", keypress_col_n, false);
 
@@ -181,54 +91,179 @@ function keypress_col_n(e) {
         switch_sub_body([0]);
     }
     if(e.key == 'r' || e.key == 'R') {
-        window.location.reload();
+        if(current_menu === "sub_body_04_play_area"){
+            init_game();
+            lets_play_already();
+        }
+        else{
+            window.location.reload();
+        }
     }
     if(e.key == 'd' || e.key == 'D') {
-        tap_col_1();
+        tap_col(1);
     }
     if(e.key == 'f' || e.key == 'F') {
-        tap_col_2();
+        tap_col(2);
     }
     if(e.key == 'j' || e.key == 'J') {
-        tap_col_3();
+        tap_col(3);
     }
     if(e.key == 'k' || e.key == 'K') {
-        tap_col_4();
+        tap_col(4);
     }
 }
+
+
+function lets_play_already(){
+    switch_sub_body([4]);
+
+    let pa_01z_countdown = document.getElementById("pa_01z_countdown");
+
+    setTimeout(function(){
+        pa_01z_countdown.innerHTML = "3";
+        pa_01z_countdown.style.color = "#FF4444";
+    }, 1000);
+
+    setTimeout(function(){
+        pa_01z_countdown.innerHTML = "2";
+        pa_01z_countdown.style.color = "#00CCFF";
+    }, 2000);
+
+    setTimeout(function(){
+        pa_01z_countdown.innerHTML = "1";
+        pa_01z_countdown.style.color = "#8888FF";
+    }, 3000);
+
+    setTimeout(function(){
+        pa_01z_countdown.innerHTML = "Play!";
+        pa_01z_countdown.style.color = "#FFFF33";
+        start_new_game();
+    }, 4000);
+
+    setTimeout(function(){
+        pa_01z_countdown.style.display = "none";
+    }, 4700);
+}
+
+
+function init_game(){
+    is_game_paused = false;
+    is_game_over = false;
+    note_id = 1;
+    current_note_id = 1;
+    combo = 0;
+    document.getElementById("pa_01c_combo").innerHTML = combo;
+    for(let i = 1; i <= latest_note_id; i++){
+        let note = document.getElementById("note_" + i);
+        if(note != null) note.parentElement.removeChild(note);
+    }
+}
+
+
+function start_new_game(){
+    init_game();
+    // setInterval(function(){
+    game_session = setInterval(function(){
+        spawn_note();
+    },note_spawn_interval);
+}
+
+
+function tap_col(n){
+    let originalBackgroundColor = document.getElementById("ps_pane_col_" + n).style.background;
+
+    document.getElementById("ps_pane_col_" + n).style.background = "#444444";
+    setTimeout(function(){
+        document.getElementById("ps_pane_col_" + n).style.background = "#000000";  //= originalBackgroundColor;
+    }, 70);
+
+    tap_note();
+}
+
+
+function tap_note(){
+    let note = document.getElementById("note_" + current_note_id);
+    if(note == null){
+        return;
+    }
+
+    let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
+    let current_height = note.getBoundingClientRect().top;
+
+    if((current_height <= pane_bottom) && (Math.abs(pane_bottom - current_height) <= buffer_difference)){
+        note.parentElement.removeChild(note);
+        current_note_id += 1;
+        combo += 1;
+        document.getElementById("pa_01c_combo").innerHTML = combo;
+    }
+}
+
+
+function game_over(){
+    is_game_over = true;
+    clearInterval(game_session);
+    let pa_01z_countdown = document.getElementById("pa_01z_countdown");
+    pa_01z_countdown.innerHTML = "Game Over!";
+    pa_01z_countdown.style.color = "#FF4444";
+    pa_01z_countdown.style.display = "block";
+}
+
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+
 function spawn_note(){
+    if(is_game_over) return;
+
     random_column = Math.floor(Math.random() * 4) + 1;
 
     let note = document.createElement("div");
-    note.className = 'note_type_1';
-    if(random_column === 1 || random_column === 4){
-        note.className = 'note_type_2';
-    }
+    note.className = (random_column === 1 || random_column === 4) ? 'note_type_2' : 'note_type_1';
     note.id = "note_" + note_id;
-    note.marginTop = '0px';
+    note.style.marginTop = '0px';
     note.style.width = getComputedStyle(document.getElementById("ps_pane_col_" + random_column)).width;
     document.getElementById("ps_pane_col_" + random_column).prepend(note);
+
+    latest_note_id += 1;
     
     move_note(note_id);
+
     note_id += 1;
 }
 
+
 async function move_note(id){
+    let note = document.getElementById("note_" + id);
+    if(note == null){
+        return;
+    }
+
     let margin_top = 1;
     let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
-    let note = document.getElementById("note_" + id);
+
     let current_height = note.getBoundingClientRect().top;
 
-    while(current_height <= pane_bottom){
-        document.getElementById("note_" + id).style.top = margin_top + 'px';
+    while((current_height <= pane_bottom)){
+        // if(is_game_over) note.parentElement.removeChild(note);
+        if(note == null) break;
+        note.style.top = margin_top + 'px';
         await sleep(note_animation_interval);
-        margin_top += speed;
+        if(is_game_paused == false) margin_top += speed;
         current_height = note.getBoundingClientRect().top;
     }
-    note.parentElement.removeChild(note);
+
+    
+
+    // if(document.getElementById("note_" + id) == null){
+    //     if(combo < id){
+    //         game_over();
+    //     }
+    // }
+    if(note != null){
+        note.parentElement.removeChild(note);
+        is_game_paused = true;
+        game_over();
+    }
 }
