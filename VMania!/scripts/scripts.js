@@ -1,7 +1,8 @@
-var note_spawn_interval = 250;
-var speed = 12;
-var note_animation_interval = 0.01;
-var buffer_difference = 30;
+var notes_per_second = 5;
+var note_spawn_interval = 1000 / notes_per_second;
+var note_speed = 12;
+var note_animation_interval = 0.001;
+var buffer_difference = 50;
 
 
 var game_session;
@@ -192,6 +193,7 @@ function tap_note(){
     let pane_bottom = document.getElementById("ps_02_pane").getBoundingClientRect().bottom;
     let current_height = note.getBoundingClientRect().bottom;
     let precision = Math.abs(pane_bottom - current_height);
+    console.log(precision);
 
     if(precision <= buffer_difference){
         note.parentElement.removeChild(note);
@@ -252,7 +254,7 @@ async function move_note(id){
         if(note == null) break;
         note.style.top = note_depth + 'px';
         await sleep(note_animation_interval);
-        if(is_game_paused == false) note_depth += speed;
+        if(is_game_paused == false) note_depth += note_speed;
         current_height = note.getBoundingClientRect().top;
     }
 
